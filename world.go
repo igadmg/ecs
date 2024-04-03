@@ -109,7 +109,7 @@ func (w *World) Update(dt float32) {
 }
 
 // RemoveEntity removes the entity across all systems.
-func (w *World) RemoveEntity(e BasicEntity) {
+func (w *World) RemoveEntity(e *BasicEntity) {
 	for _, sys := range w.systems {
 		sys.Remove(e)
 	}

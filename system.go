@@ -14,7 +14,7 @@ type System interface {
 	Update(dt float32)
 
 	// Remove removes the given entity from the system.
-	Remove(e BasicEntity)
+	Remove(e *BasicEntity)
 }
 
 // SystemAddByInterfacer is a system that also implements the AddByInterface method
@@ -39,6 +39,14 @@ type Initializer interface {
 	// New initializes the given System, and may be used to initialize some
 	// values beforehand, like storing a reference to the World.
 	New(*World)
+}
+
+type SystemT[T any] struct {
+	Entities []T
+}
+
+func (s *SystemT[T]) Add(entity T) {
+	s.Entities = append(s.Entities, entity)
 }
 
 // systems implements a sortable list of `System`. It is indexed on
