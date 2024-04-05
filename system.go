@@ -14,7 +14,7 @@ type System interface {
 	Update(dt float32)
 
 	// Remove removes the given entity from the system.
-	Remove(e *BasicEntity)
+	Remove(e BasicEntity)
 }
 
 // SystemAddByInterfacer is a system that also implements the AddByInterface method
