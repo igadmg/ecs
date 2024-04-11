@@ -111,6 +111,10 @@ func (w *World) Systems() []System {
 // once every frame, with dt being the duration since the previous update.
 func (w *World) Update(dt float32) {
 	for _, system := range w.Systems() {
+		if system == nil {
+			continue
+		}
+
 		system.Update(dt)
 	}
 }
