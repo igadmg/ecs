@@ -2,6 +2,7 @@ package ecs
 
 import (
 	"reflect"
+	"slices"
 	"sort"
 )
 
@@ -12,14 +13,20 @@ type World struct {
 	sysIn, sysEx map[reflect.Type][]reflect.Type
 }
 
-// AddSystem adds the given System to the World, sorted by priority.
+// AddSystem adds the given System to the World
 func (w *World) AddSystem(system System) {
 	if initializer, ok := system.(Initializer); ok {
 		initializer.New(w)
 	}
 
 	w.systems = append(w.systems, system)
-	sort.Sort(w.systems)
+}
+
+// RemoveSystem removes the given System from the World
+func (w *World) RemoveSystem(system System) {
+	if i := slices.Index(w.systems, system); i != -1 {
+		w.systems = slices.Delete(w.systems, i, i+1)
+	}
 }
 
 // AddSystemInterface adds a system to the world, but also adds a filter that allows
