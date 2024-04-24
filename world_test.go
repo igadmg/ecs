@@ -111,6 +111,7 @@ func TestWorld_SortSystems(t *testing.T) {
 	w.AddSystem(&one)
 	two := priorityChangeSystem{Rank: 2}
 	w.AddSystem(&two)
+	w.SortSystems()
 	expected := []System{
 		&two,
 		&one,
@@ -127,7 +128,7 @@ func TestWorld_SortSystems(t *testing.T) {
 		p := sys.(Prioritizer)
 		exp := expected[idx].(Prioritizer)
 		if p.Priority() != exp.Priority() {
-			t.Error("Systems were switched before sort wwas called")
+			t.Error("Systems were switched before sort was called")
 		}
 	}
 	w.SortSystems()
@@ -135,7 +136,7 @@ func TestWorld_SortSystems(t *testing.T) {
 		p := sys.(Prioritizer)
 		exp := expected[len(expected)-1-idx].(Prioritizer)
 		if p.Priority() != exp.Priority() {
-			t.Error("Systems were switched before sort wwas called")
+			t.Error("Systems were switched before sort was called")
 		}
 	}
 }

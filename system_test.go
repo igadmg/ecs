@@ -52,6 +52,7 @@ func TestSystemPriority(t *testing.T) {
 	sys2 := SystemPrioritySecond{}
 	w.AddSystem(&sys2)
 	w.AddSystem(&SystemPriorityFirst{})
+	w.SortSystems()
 	ent := struct {
 		BasicEntity
 		PriorityComponent
