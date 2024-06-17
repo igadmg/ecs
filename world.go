@@ -4,13 +4,19 @@ import (
 	"reflect"
 	"slices"
 	"sort"
+	"sync/atomic"
 )
 
 // World contains a bunch of Entities, and a bunch of Systems. It is the
 // recommended way to run ecs.
 type World struct {
+	idInc        uint64
 	systems      systems
 	sysIn, sysEx map[reflect.Type][]reflect.Type
+}
+
+func (w *World) NewBasic() BasicEntity {
+	return BasicEntity{id: atomic.AddUint64(&w.idInc, 1)}
 }
 
 // AddSystem adds the given System to the World
