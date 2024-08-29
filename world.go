@@ -5,8 +5,6 @@ import (
 	"slices"
 	"sort"
 	"sync/atomic"
-
-	_ "github.com/EngoEngine/ecs/cgo"
 )
 
 // World contains a bunch of Entities, and a bunch of Systems. It is the
@@ -18,7 +16,6 @@ type World struct {
 }
 
 func (w *World) NewBasic() BasicEntity {
-	//cgo.Ecs_declare_archtype()
 	return BasicEntity{id: atomic.AddUint64(&w.idInc, 1)}
 }
 
