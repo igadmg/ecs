@@ -8,12 +8,14 @@ var (
 	idInc uint64
 )
 
+type Id_t = uint64
+
 // A BasicEntity is simply a set of components with a unique ID attached to it,
 // nothing more. It belongs to any amount of Systems, and has a number of
 // Components
 type BasicEntity struct {
 	// Entity ID.
-	id       uint64
+	id       Id_t
 	parent   *BasicEntity
 	children []*BasicEntity
 }
@@ -60,7 +62,7 @@ func (e BasicEntity) ID() uint64 {
 // EG:
 // s.AddByInterface(a interface{GetBasicEntity()*BasicEntity, GetSpaceComponent()*SpaceComponent){
 // s.Add(a.GetBasicEntity(),a.GetSpaceComponent())
-//}
+// }
 func (e *BasicEntity) GetBasicEntity() *BasicEntity {
 	return e
 }
